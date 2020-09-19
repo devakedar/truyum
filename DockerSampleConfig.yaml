@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: truyumdeployment
+  name: dockersampleconfigdeployment
 spec:
   replicas: 1
   selector:
@@ -13,8 +13,8 @@ spec:
         app: truyum
     spec:
       containers:
-      - name: truyumrepos
-        image: rgxcr.azurecr.io/truyumrepos:latest
+      - name: dockersamplerepos
+        image: rgxcr.azurecr.io/dockersamplerepos:latest
         ports:
         - containerPort: 8080
       imagePullSecrets:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: truyumconfig
+  name: dockersampleconfig
 spec:
   type: LoadBalancer
   ports:
