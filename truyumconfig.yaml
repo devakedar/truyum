@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truyumdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: truyum
+  template:
+    metadata:
+      labels:
+        app: truyum
+    spec:
+      containers:
+      - name: truyumrepos
+        image: rgxcr.azurecr.io/truyumrepos:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: dsconfigsn
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: truyumconfig
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: truyum
